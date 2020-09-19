@@ -11,14 +11,16 @@ import java.io.IOException;
 public class RpcServerTest {
 
     public static void main(String[] args) {
-        RpcServer server = RpcServer.getInstance();
-        server.setPort(9926);
-        server.registry(HelloServiceImpl.class);
-        try {
-            server.start();
-        } catch (IOException e) {
-            e.printStackTrace();
-            System.err.println("RPC Server Start Error! " + e.getMessage());
-        }
+        new Thread(() -> {
+            RpcServer server = RpcServer.getInstance();
+            server.setPort(9926);
+            server.registry(HelloServiceImpl.class);
+            try {
+                server.start();
+            } catch (IOException e) {
+                e.printStackTrace();
+                System.err.println("RPC Server Start Error! " + e.getMessage());
+            }
+        }).start();
     }
 }

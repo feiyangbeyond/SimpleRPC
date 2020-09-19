@@ -11,11 +11,11 @@ import java.net.InetSocketAddress;
 public class RpcClientTest {
 
     public static void main(String[] args) throws ClassNotFoundException {
-
-        Class<?> clazz = Class.forName("cn.tsxygfy.rpc.simple.service.HelloService");
-        HelloService helloService = Client.getRemoteProxyObject(clazz, new InetSocketAddress(9926));
-        String message = helloService.sayHi("Anni");
-        System.out.println(message);
+        for (int i = 0; i < 100; i++) {
+            Class<?> clazz = Class.forName("cn.tsxygfy.rpc.simple.service.HelloService");
+            HelloService helloService = Client.getRemoteProxyObject(clazz, new InetSocketAddress(9926));
+            String message = helloService.sayHi("Anni");
+            System.out.println(message + "@" + i);
+        }
     }
-
 }
